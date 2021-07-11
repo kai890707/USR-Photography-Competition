@@ -1,7 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\BackController;
+use App\Http\Controllers\ItemsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +17,41 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/',function(){
+    return view('lobby.index');
+});
+//首頁路由
+// Route::get('/login',[LoginController::class,'index'])->name('login');
+//
+Route::group(['middleware' => 'identity'], function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+});
+Route::group(['prefix' => 'login'], function () {
+    Route::get('/', [LoginController::class, 'index'])->name('login');
+    Route::post('/login', [LoginController::class, 'store']);
+    Route::post('/logout', [LoginController::class, 'destroy']);
+});
+Route::group(['prefix' => 'front','middleware' => 'identity'], function () {
+    Route::get('/', [ReviewController::class, 'index'])->name('front');
+    Route::post('/getGroup', [ReviewController::class, 'getGroup']);
+    
+
+});
+Route::group(['prefix' => 'back','middleware' => 'identity'], function () {
+    Route::get('/', [BackController::class, 'index'])->name('back');
+    Route::get('/setting', [BackController::class, 'setView']);
+    Route::post('/setGroup', [BackController::class, 'setGroup']);
+    Route::post('/getGroup', [BackController::class, 'getGroup']);
+    Route::get('/getAllUser', [BackController::class, 'getAllUser']);
+    Route::post('/updatePermission', [BackController::class, 'updatePermission']);
+    Route::post('/appendChair', [BackController::class, 'appendChair']);
+    Route::post('/deleteChair', [BackController::class, 'deleteChair']);
+    Route::post('/uploadCSV', [BackController::class, 'uploadCSV']);
+});
+Route::group(['prefix' => 'items','middleware' => 'identity'], function () {
+    Route::get('groupItem/{id}', [ItemsController::class, 'getItemOfGroup']);
+    Route::get('scoreDone/{id}', [ItemsController::class, 'scoreDone']);
+    Route::get('scoreuUndone/{id}', [ItemsController::class, 'scoreuUndone']);
+    Route::get('photoItem/{id}', [ItemsController::class, 'getItemOfPhoto']);
+    Route::post('scoreSheet', [ItemsController::class, 'scoreSheet']);
 });
