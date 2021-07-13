@@ -15,6 +15,12 @@ class User extends Model
         $query = User::select('id','name','account','permission')->get();
         return $query;
     }
+    public function getAllChair()
+    {
+        $query = User::select('id','name','account','permission')->where('permission',1)->get();
+        return $query;
+
+    }
     public function updatePermission($data)
     {
         $newPermission = $data['permission']==1?2:1;

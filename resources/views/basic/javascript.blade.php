@@ -1,5 +1,6 @@
 <!-- <script src="{{ asset('assets/js/bootstrap.min.js') }}" crossorigin="anonymous"></script> -->
 <script src="{{ asset('assets/js/sweetalert2.js') }}" crossorigin="anonymous"></script>
+<script src="{{ asset('assets/js/bundle.min.js') }}" crossorigin="anonymous"></script>
 <script>
     const csrfToken = document.head.querySelector("[name~=csrf-token][content]").content;
     Response = {
@@ -9,7 +10,7 @@
         },
         post: (requireURL, data = null) => {
             return new Promise((reslove, reject) => {
-                fetch(`{{url('${requireURL}')}}`, {
+                fetch(`{{ url('${requireURL}') }}`, {
                         headers: {
                             'Content-Type': 'application/json',
                             "X-CSRF-Token": csrfToken
@@ -22,7 +23,7 @@
         },
         get: (requireURL) => {
             return new Promise((reslove, reject) => {
-                fetch(`{{url('${requireURL}')}}`, {
+                fetch(`{{ url('${requireURL}') }}`, {
                         headers: {
                             'Content-Type': 'application/json',
                             "X-CSRF-Token": csrfToken
@@ -32,9 +33,9 @@
                     .catch((err) => reslove(err))
             });
         },
-        file: (requireURL,file) => {
+        file: (requireURL, file) => {
             return new Promise((reslove, reject) => {
-                fetch(`{{url('${requireURL}')}}`, {
+                fetch(`{{ url('${requireURL}') }}`, {
                         headers: {
                             "X-CSRF-Token": csrfToken
                         },

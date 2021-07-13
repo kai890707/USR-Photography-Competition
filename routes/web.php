@@ -50,8 +50,9 @@ Route::group(['prefix' => 'back','middleware' => 'identity'], function () {
 });
 Route::group(['prefix' => 'items','middleware' => 'identity'], function () {
     Route::get('groupItem/{id}', [ItemsController::class, 'getItemOfGroup']);
-    Route::get('scoreDone/{id}', [ItemsController::class, 'scoreDone']);
-    Route::get('scoreuUndone/{id}', [ItemsController::class, 'scoreuUndone']);
+    Route::get('allItems/{id}', [ItemsController::class, 'getAllItems']);
+    Route::get('scoreDone/{id}', [ItemsController::class, 'getItemOfDone']);
+    Route::get('scoreUnDone/{id}', [ItemsController::class, 'getItemOfUnDone']);
     Route::get('photoItem/{id}', [ItemsController::class, 'getItemOfPhoto']);
     Route::post('scoreSheet', [ItemsController::class, 'scoreSheet']);
 });

@@ -9,14 +9,14 @@ class Score extends Model
 {
     use HasFactory;
     protected $table = "score";
-    protected $fillable = ['photo_id', 'user_id'];
+    protected $fillable = ['photo_id', 'user_id','score_A','score_B','score_C','comments','status'];
     /**
      * 取圖片分數
      */
     public function getPhotoScore($id)
     {
         $query = Score::join('user', 'score.user_id', '=', 'user.id')
-            ->select('user.name as userName', 'score_A as scoreA', 'score_B as scoreB', 'score_C as scoreC', 'comments')
+            ->select('user.name as userName', 'score_A as scoreA', 'score_B as scoreB', 'score_C as scoreC', 'comments','status')
             ->where('photo_id', $id)
             ->get();
         return $query;
@@ -29,7 +29,7 @@ class Score extends Model
     {
         # code...
         $query = Score::join('user', 'score.user_id', '=', 'user.id')
-            ->select('user.name as userName', 'score_A as scoreA', 'score_B as scoreB', 'score_C as scoreC', 'comments')
+            ->select('user.name as userName', 'score_A as scoreA', 'score_B as scoreB', 'score_C as scoreC', 'comments','status')
             ->where('photo_id', $id)
             ->where('user_id', $request->session()->get('uuid'))
             ->get();
@@ -58,6 +58,7 @@ class Score extends Model
                 'score_B' => $data['scoreB'],
                 'score_C' => $data['scoreC'],
                 'comments' => $data['comments'],
+                'status' => 2
             ]);
         return $query;
     }
@@ -71,6 +72,7 @@ class Score extends Model
             'score_B' => $data['scoreB'],
             'score_C' => $data['scoreC'],
             'comments' => $data['comments'],
+            'status' => 2
         ]);
         return $query;
     }

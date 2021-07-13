@@ -24,6 +24,7 @@ class Score extends Migration
             $table->string('score_B')->comment("分數2");
             $table->string('score_C')->comment("分數3");
             $table->text('comments')->comment("評語");
+            $table->string('status')->comment("評分狀態");
             $table->timestamps();
         });
     }

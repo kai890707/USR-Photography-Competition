@@ -75,7 +75,6 @@ class BackController extends Controller
             })
             ->rawColumns(['action', 'action2'])
             ->make(true);
-        // return response()->json($result);
     }
     public function updatePermission(Request $request)
     {
@@ -138,74 +137,12 @@ class BackController extends Controller
         if($request->hasFile('file')){
             $file = $request->file('file');
             Excel::import(new UsersImport,$file);
-            // dd($file);
+            return response()->json(array('status' => ResponseController::$API_SUCCESS, 'msg' => "匯入成功"));
+        }else{
+             return response()->json(array('status' => ResponseController::$API_SUCCESS, 'msg' => "匯入失敗"));
         }
     
     
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Back  $back
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Back $back)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Back  $back
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Back $back)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Back  $back
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Back $back)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Back  $back
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Back $back)
-    {
-        //
-    }
 }

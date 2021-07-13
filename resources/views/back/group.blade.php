@@ -2,8 +2,8 @@
 @section('header_title', '第一屆資訊學院城鄉資訊能力深化培育與應用推廣計畫-攝影比賽評審系統')
 
 @section('css')
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-<link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
 @endsection
 @section('main')
 
@@ -12,7 +12,7 @@
     <header class="bg-dark py-5">
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
-            <h1 class="display-5 fw-bolder">第一屆資訊學院城鄉資訊能力深化培育與應用推廣計畫<br>攝影比賽評審系統-後台</h1>
+                <h1 class="display-5 fw-bolder">第一屆資訊學院城鄉資訊能力深化培育與應用推廣計畫<br>攝影比賽評審系統-後台</h1>
                 <p class="lead fw-normal text-white-50 mb-0">樹德科技大學</p>
             </div>
         </div>
@@ -43,7 +43,8 @@
                 <div class="col mb-5">
                     <div class="card h-100">
                         <!-- Sale badge-->
-                        <div class="badge bg-danger text-white position-absolute" style="top: 0.5rem; right: 0.5rem">已評分</div>
+                        <div class="badge bg-danger text-white position-absolute" style="top: 0.5rem; right: 0.5rem">已評分
+                        </div>
                         <!-- Product image-->
                         <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
                         <!-- Product details-->
@@ -72,7 +73,8 @@
                 <div class="col mb-5">
                     <div class="card h-100">
                         <!-- Sale badge-->
-                        <div class="badge bg-danger text-white position-absolute" style="top: 0.5rem; right: 0.5rem">已評分</div>
+                        <div class="badge bg-danger text-white position-absolute" style="top: 0.5rem; right: 0.5rem">已評分
+                        </div>
                         <!-- Product image-->
                         <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
                         <!-- Product details-->
@@ -121,7 +123,8 @@
                 <div class="col mb-5">
                     <div class="card h-100">
                         <!-- Sale badge-->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale
+                        </div>
                         <!-- Product image-->
                         <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
                         <!-- Product details-->
@@ -162,7 +165,8 @@
                 <div class="col mb-5">
                     <div class="card h-100">
                         <!-- Sale badge-->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale
+                        </div>
                         <!-- Product image-->
                         <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
                         <!-- Product details-->
@@ -221,7 +225,6 @@
     </section>
     <!-- Footer-->
 
-    @endsection
-    @section('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
-    @endsection
+@endsection
+@section('scripts')
+@endsection

@@ -25,24 +25,44 @@ class ItemsController extends Controller
     }
     /**
      * return view
+     * {id => groupID}
      */
     public function getItemOfGroup(Request $request,$id)
     {
         $groupItems = $this->items->getItemOfGroup($id);
         $groupName = $this->group->getGroupName($id);
-        // $groupItemDone = $this->items->getItemOfDone($request,$id);
-        // dd($groupItemDone);
-        // $groupItemUndone = $this->items->groupItemOfUndone($request,$id);
-        // dd($groupItemUndone);
         return view('items.groupItems',compact('groupItems','groupName'));
     }
+    /**
+     * 取得所有作品
+     */
+    public function getAllItems(Request $request,$id)
+    {
+        $Items = $this->items->getAllItems($request,$id);
+        $groupName = $this->group->getGroupName($id);
+        return view('front.all_project',compact('Items','groupName'));
+    }
+    /**
+     * 取得目前評審已評完分作品
+     * {id => groupID}
+     */
     public function getItemOfDone(Request $request,$id)
     {
-        # code...
-        $groupItemDone = $this->items->getItemOfDone($request,$id);
-        dd($groupItemDone);
+        $groupItems = $this->items->getItemOfDone($request,$id);
+        $groupName = $this->group->getGroupName($id);
+        return view('front.done',compact('groupItems','groupName'));
         
-
+    }
+     /**
+     * 取得目前評審未評完分作品
+     * {id => groupID}
+     */
+    public function getItemOfUnDone(Request $request,$id)
+    {
+        $groupItems = $this->items->getItemOfUnDone($request,$id);
+        $groupName = $this->group->getGroupName($id);
+        return view('front.undone',compact('groupItems','groupName'));
+        
     }
     public function getItemOfPhoto(Request $request,$id)
     {
@@ -52,7 +72,7 @@ class ItemsController extends Controller
         if(count($photoInfos)==0){
             return view('404');
         }else{
-            $getItemOfNexts = $this->items->getItemOfNext($id,$photoInfos[0]["groupId"]);
+            $getItemOfNexts = $this->items->getItemOfNext($request,$id,$photoInfos[0]["groupId"]);
             $photoScoreArray = $this->score->getPhotoScore($id);
             if(count($photoScoreArray)==0){
                 $totalScore = "尚未評分";
@@ -71,6 +91,9 @@ class ItemsController extends Controller
         
        
     }
+    /**
+     * 分數修改
+     */
     public function scoreSheet(Request $request)
     {
         # code...

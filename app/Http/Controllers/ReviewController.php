@@ -17,7 +17,9 @@ class ReviewController extends Controller
     public function index()
     {
         //
-        return view('front.control');
+        $donegroup = $this->group->getGroup();
+        $undonegroup = $this->group->getGroup();
+        return view('front.control',compact('donegroup','undonegroup'));
     
     }
     public function getGroup(Request $request)

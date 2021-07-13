@@ -19,6 +19,7 @@ class Applicant extends Migration
             $table->string('name')->comment("報名人員姓名");
             $table->string('phone')->comment("電話");
             $table->string('community')->comment("所屬社區");
+            $table->string('email')->comment("報名人員Email");  
             $table->timestamps();
         });
     }
