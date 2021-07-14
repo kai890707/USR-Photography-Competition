@@ -9,25 +9,18 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">作品評分狀況</a>
+                            data-bs-toggle="dropdown" aria-expanded="false">所有作品</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{{ url('back/') }}">所有作品</a></li>
+                            <li><a class="dropdown-item" disabled>組別</a></li>
                             <li>
                                 <hr class="dropdown-divider" />
                             </li>
-                            <li><a class="dropdown-item" href="{{ url('back/chairScore') }}">各評審評分</a></li>
+                            <li><a class="dropdown-item" href="{{ url('items/allItems/1') }}">人像攝影</a></li>
+                            <li><a class="dropdown-item" href="{{ url('items/allItems/2') }}">風景拍攝</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('back/statistics') }}">分數統計</a></li>
-
-                    <li class="nav-item"><a class="nav-link" href="{{ url('back/setting') }}">設置</a></li>
                 </ul>
-                <form class="d-flex">
-                    <button class="btn btn-outline-dark" type="button" id="logout">
-                        <i class="bi bi-box-arrow-in-right  "></i>
-                        登出
-                    </button>
-                </form>
+
             </div>
         </div>
     </nav>

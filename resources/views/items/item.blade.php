@@ -43,15 +43,15 @@
                             </table>
                         </div>
                         @if (Session::get('permission') == 1)
-                            @if (count($chairScore) != 0)
+                            @if ($chairScore[0]->status == 2)
                                 <div class="fs-5 mt-4 mb-4 align-items-center">
                                     <table class="table">
                                         <thead class="table-dark">
                                             <tr>
                                                 <th scope="col">評審</th>
-                                                <th scope="col">分數A</th>
-                                                <th scope="col">分數B</th>
-                                                <th scope="col">分數C</th>
+                                                <th scope="col">構圖技巧(30%)</th>
+                                                <th scope="col">攝影技巧(30%)</th>
+                                                <th scope="col">主題內容(40%)</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -78,8 +78,15 @@
 
                                                 </tr>
                                             @endforeach
+
                                         </tbody>
                                     </table>
+                                    <div class="fs-5 mt-4 mb-4 align-items-center">
+                                        <h3 class=" fw-bolder">目前總分<span class="display-6 fw-bolder text-danger">&nbsp;
+                                                {{ $chairScore[0]->scoreA * 0.3 + $chairScore[0]->scoreB * 0.3 + $chairScore[0]->scoreC * 0.4 }}</span>
+                                        </h3>
+                                        <h3 class=" fw-bolder text-danger"></h3>
+                                    </div>
                                 </div>
                             @else
                                 <div class="fs-5 mt-4 mb-4 align-items-center">
@@ -111,9 +118,9 @@
                                                         <thead class="table-dark">
                                                             <tr>
                                                                 <th scope="col">評審</th>
-                                                                <th scope="col">構圖技巧</th>
-                                                                <th scope="col">攝影技巧</th>
-                                                                <th scope="col">主題內容</th>
+                                                                <th scope="col">構圖技巧(30%)</th>
+                                                                <th scope="col">攝影技巧(30%)</th>
+                                                                <th scope="col">主題內容(40%)</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -241,6 +248,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+
                     </div>
                     @if (!empty($totalScore))
                         <div class="fs-5 mt-4 mb-4 align-items-center">

@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\BackController;
 use App\Http\Controllers\ItemsController;
+use App\Http\Controllers\PortfolioController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,6 +41,9 @@ Route::group(['prefix' => 'front','middleware' => 'identity'], function () {
 Route::group(['prefix' => 'back','middleware' => 'identity'], function () {
     Route::get('/', [BackController::class, 'index'])->name('back');
     Route::get('/setting', [BackController::class, 'setView']);
+    Route::get('/ItemOfGroup/{id}', [BackController::class, 'groupDataTableView']);
+    Route::get('/chairScore', [BackController::class, 'chairScoreView']);
+    Route::get('/statistics', [BackController::class, 'statisticsView']);
     Route::post('/setGroup', [BackController::class, 'setGroup']);
     Route::post('/getGroup', [BackController::class, 'getGroup']);
     Route::get('/getAllUser', [BackController::class, 'getAllUser']);
@@ -47,6 +51,7 @@ Route::group(['prefix' => 'back','middleware' => 'identity'], function () {
     Route::post('/appendChair', [BackController::class, 'appendChair']);
     Route::post('/deleteChair', [BackController::class, 'deleteChair']);
     Route::post('/uploadCSV', [BackController::class, 'uploadCSV']);
+    Route::get('/exportCSV/{id}', [BackController::class, 'exportCSV']);
 });
 Route::group(['prefix' => 'items','middleware' => 'identity'], function () {
     Route::get('groupItem/{id}', [ItemsController::class, 'getItemOfGroup']);
@@ -54,5 +59,12 @@ Route::group(['prefix' => 'items','middleware' => 'identity'], function () {
     Route::get('scoreDone/{id}', [ItemsController::class, 'getItemOfDone']);
     Route::get('scoreUnDone/{id}', [ItemsController::class, 'getItemOfUnDone']);
     Route::get('photoItem/{id}', [ItemsController::class, 'getItemOfPhoto']);
+    Route::get('getAllItemsDataTable/{id}', [ItemsController::class, 'getAllItemsDataTable']);
+    Route::get('getAllItemsDataTableWithChair/{id}', [ItemsController::class, 'getAllItemsDataTableWithChair']);
+      Route::get('getAllItemsRankDataTable/{id}', [ItemsController::class, 'getAllItemsRankDataTable']);
     Route::post('scoreSheet', [ItemsController::class, 'scoreSheet']);
+});
+Route::group(['prefix' => 'portfolio'], function () {
+    Route::get('/', [PortfolioController::class, 'index']);
+    Route::get('/items/{id}', [PortfolioController::class, 'getItems']);
 });

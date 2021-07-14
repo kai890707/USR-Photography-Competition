@@ -26,33 +26,35 @@
             user-select: none;
         }
 
-     
-        #img{ 
+
+        #img {
             background-image: url('images/stu.jpeg');
             background-size: cover;
             width: 100%;
             height: 100%;
-            z-index:-999;
+            z-index: -999;
             position: absolute;
             filter: brightness(0.8);
         }
+
         #img1::before {
             content: '';
             display: block;
             position: absolute;
             background-color: #000;
             opacity: 0.1;
-            z-index:-998;
+            z-index: -998;
             width: 100%;
             height: 100%;
         }
-        
+
 
         @media (min-width: 768px) {
             .bd-placeholder-img-lg {
                 font-size: 3.5rem;
             }
         }
+
     </style>
 
 
@@ -69,8 +71,8 @@
                 <nav class="nav nav-masthead justify-content-center float-md-end">
                     <a class="nav-link active" aria-current="page" href="#">首頁</a>
                     <a class="nav-link" href="https://forms.gle/4kWvgDmtjQjMsAkMA" target="blank">報名參加</a>
-                    <a class="nav-link" href="{{url('login')}}">評審登入</a>
-                    <a class="nav-link" href="#">作品集</a>
+                    <a class="nav-link" href="{{ url('login') }}">評審登入</a>
+                    <a class="nav-link" href="{{ url('portfolio') }}">作品集</a>
                 </nav>
             </div>
         </header>
@@ -79,13 +81,15 @@
             <h1>樹德科技大學</h1>
             <h2 class="fw-bolder">第一屆資訊學院城鄉資訊能力深化培育與應用推廣計畫-攝影比賽</h2>
             <p class="lead mt-5">
-                <a href="https://forms.gle/4kWvgDmtjQjMsAkMA"  target="blank" class="btn btn-lg btn-secondary fw-bold border-white bg-white">前往參加</a>
+                <a href="https://forms.gle/4kWvgDmtjQjMsAkMA" target="blank"
+                    class="btn btn-lg btn-secondary fw-bold border-white bg-white">前往參加</a>
             </p>
         </main>
 
         <footer class="mt-auto text-white-50">
             <p class="m-0 text-center text-white">Copyright &copy; SHU-TE University L0726</p>
-            <p class="m-0 text-center text-white">系統問題請聯絡<a class="m-0 p-0" href="mailto:s18113223@stu.edu.tw">s18113223@stu.edu.tw</a></p>
+            <p class="m-0 text-center text-white">系統問題請聯絡<a class="m-0 p-0"
+                    href="mailto:s18113223@stu.edu.tw">s18113223@stu.edu.tw</a></p>
         </footer>
     </div>
 

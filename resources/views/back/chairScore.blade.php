@@ -23,25 +23,24 @@
     <section class="py-5">
 
         <div class="container px-4 px-lg-5 mt-5">
-            <h5 class=" fw-bolder text-dark-50 mr-5">組別</h5>
+            <h5 class=" fw-bolder text-dark-50 mr-5">評審</h5>
             <div class="mb-4">
-
-                @foreach ($group as $group)
-                    @if ($group->id % 2 == 0)
+                @foreach ($chair as $chair)
+                    @if ($chair->id % 2 == 0)
                         <button type="button" class="btn btn-outline-primary"
-                            onclick="getTable({{ $group->id }})">{{ $group->name }}</button>
+                            onclick="getTable({{ $chair->id }})">{{ $chair->name }}</button>
                     @else
                         <button type="button" class="btn btn-outline-success"
-                            onclick="getTable({{ $group->id }})">{{ $group->name }}</button>
+                            onclick="getTable({{ $chair->id }})">{{ $chair->name }}</button>
                     @endif
                 @endforeach
             </div>
-            <hr>
+
             {{-- <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"> --}}
             <table id="userDatatable" class="table table-bordered table-striped" cellspacing="0" width="100%">
                 <thead>
                     <tr>
-                        <th>組別名稱</th>
+                        <th>組別</th>
                         <th>評分表編號</th>
                         <th>圖片編號</th>
                         <th>投稿人姓名</th>
@@ -71,7 +70,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
     <script>
-        function getTable(groupID = 1) {
+        function getTable(chairID = 1) {
             $('#userDatatable').DataTable({
                 "language": {
                     "lengthMenu": "顯示 _MENU_ 筆消息",
@@ -90,12 +89,10 @@
                 autoWidth: true,
                 searching: true,
                 autoWidth: false,
-
                 columns: [{
                         width: '10%',
                         data: 'groupName'
-                    },
-                    {
+                    }, {
                         width: '10%',
                         data: 'scoreId'
                     },
@@ -138,7 +135,7 @@
                 ],
                 "order": [],
                 "ajax": {
-                    url: `{{ url('items/getAllItemsDataTable/ ${groupID} ') }}`,
+                    url: `{{ url('items/getAllItemsDataTableWithChair/ ${chairID} ') }}`,
                 }
             })
         }

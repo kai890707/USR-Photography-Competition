@@ -9,17 +9,20 @@
 
 
     <!-- Header-->
-    <header class="bg-dark py-5">
+    <header class="bg-Custom-blue py-5">
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
                 <h1 class="display-5 fw-bolder">第一屆資訊學院城鄉資訊能力深化培育與應用推廣計畫<br>攝影比賽評審系統</h1>
-                <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
+                <p class="lead fw-normal text-white-50 mb-0">樹德科技大學</p>
             </div>
         </div>
     </header>
     <!-- Section-->
     <section class="py-5" style="min-height:50vh">
         <div class="container px-4 px-lg-5 mt-5">
+            <div class="row justify-content-center mb-4">
+                <h1 class="text-center">{{ $groupName->groupName }}-所有作品</h1>
+            </div>
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 @foreach ($Items as $data)
                     <div class="col mb-5">

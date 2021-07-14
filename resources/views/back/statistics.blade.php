@@ -45,14 +45,11 @@
                         <th>評分表編號</th>
                         <th>圖片編號</th>
                         <th>投稿人姓名</th>
-                        <th>圖片位置</th>
-                        <th>評審</th>
-                        <th>構圖技巧分數</th>
-                        <th>攝影技巧分數</th>
-                        <th>主題內容分數</th>
+                        {{-- <th>評審</th> --}}
+                        <th>構圖技巧平均分數</th>
+                        <th>攝影技巧平均分數</th>
+                        <th>主題內容平均分數</th>
                         <th>總分</th>
-                        <th>評分狀態</th>
-
                     </tr>
                 </thead>
                 <tbody id="tbody">
@@ -107,14 +104,10 @@
                         width: '10%',
                         data: 'applicantName'
                     },
-                    {
-                        width: '10%',
-                        data: 'photoPath'
-                    },
-                    {
-                        width: '10%',
-                        data: 'userName'
-                    },
+                    // {
+                    //     width: '10%',
+                    //     data: 'userName'
+                    // },
                     {
                         width: '10%',
                         data: 'scoreA'
@@ -131,17 +124,13 @@
                         width: '10%',
                         data: 'total'
                     },
-                    {
-                        width: '10%',
-                        data: 'action'
-                    }
                 ],
                 "order": [],
                 "ajax": {
-                    url: `{{ url('items/getAllItemsDataTable/ ${groupID} ') }}`,
+                    url: `{{ url('items/getAllItemsRankDataTable/ ${groupID} ') }}`,
                 }
             })
         }
-        getTable(2);
+        getTable();
     </script>
 @endsection

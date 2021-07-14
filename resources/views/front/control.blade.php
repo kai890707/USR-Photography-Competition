@@ -9,7 +9,7 @@
 
 
     <!-- Header-->
-    <header class="bg-dark py-5">
+    <header class="bg-Custom-blue py-5">
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
                 <h1 class="display-5 fw-bolder">第一屆資訊學院城鄉資訊能力深化培育與應用推廣計畫<br>攝影比賽評審系統</h1>
@@ -64,7 +64,7 @@
         })();
         var control = {
             watchItems: (id) => {
-                window.location.href = `{{ url('items/groupItem/${id}') }}`
+                window.location.href = `{{ url('items/allItems/${id}') }}`
             },
             watchDone: (id) => {
                 window.location.href = `{{ url('items/scoreDone/${id}') }}`

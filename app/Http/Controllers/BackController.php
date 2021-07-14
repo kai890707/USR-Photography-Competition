@@ -10,6 +10,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\ResponseController;
 use App\Models\User;
 use Validator;
+use App\Exports\UsersExport;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\UploadedFile;
 use Maatwebsite\Excel\HeadingRowImport;
@@ -33,11 +34,28 @@ class BackController extends Controller
      */
     public function index(Request $request)
     {
-        return view('back.control');
+         $group = $this->group->getGroup();
+        return view('back.control',compact('group'));
     }
     public function setView()
     {
-        return view('back.setting');
+        $chair = $this->user->getAllChair();
+        return view('back.setting',compact('chair'));
+    }
+    public function chairScoreView()
+    {
+        $chair = $this->user->getAllChair();
+        return view('back.chairScore',compact('chair'));
+    }
+    public function groupDataTableView($id)
+    {
+        $chair = $this->user->getAllChair();
+         return view('back.group',compact('id','chair'));
+    }
+    public function statisticsView()
+    {
+        $group = $this->group->getGroup();
+         return view('back.statistics',compact('group'));
     }
     public function getGroup(Request $request)
     {
@@ -141,8 +159,11 @@ class BackController extends Controller
         }else{
              return response()->json(array('status' => ResponseController::$API_SUCCESS, 'msg' => "匯入失敗"));
         }
-    
-    
     }
-
+    public function exportCSV($id)
+    {
+        
+        return Excel::download(new UsersExport($id), 'score.xlsx');
+      
+    }
 }

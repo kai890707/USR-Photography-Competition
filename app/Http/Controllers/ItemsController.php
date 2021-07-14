@@ -6,7 +6,7 @@ use App\Models\Group;
 use App\Models\Items;
 use App\Models\Score;
 use Illuminate\Http\Request;
-
+use Yajra\DataTables\Facades\DataTables;
 use Validator;
 use function PHPUnit\Framework\isNull;
 
@@ -29,7 +29,7 @@ class ItemsController extends Controller
      */
     public function getItemOfGroup(Request $request,$id)
     {
-        $groupItems = $this->items->getItemOfGroup($id);
+        $groupItems = $this->items->getItemOfGroup($request,$id);
         $groupName = $this->group->getGroupName($id);
         return view('items.groupItems',compact('groupItems','groupName'));
     }
@@ -64,23 +64,27 @@ class ItemsController extends Controller
         return view('front.undone',compact('groupItems','groupName'));
         
     }
+    /**
+     * 圖片資訊
+     */
     public function getItemOfPhoto(Request $request,$id)
     {
         $photoInfos = $this->items->getItemOfPhoto($id);
-        $chairScore = $this->score->getScoreOfChair($request,$id);
+        $chairScore = $this->score->getScoreOfChair($request,$id); //目前評審分數
         $photoID = $id;
         if(count($photoInfos)==0){
             return view('404');
         }else{
             $getItemOfNexts = $this->items->getItemOfNext($request,$id,$photoInfos[0]["groupId"]);
-            $photoScoreArray = $this->score->getPhotoScore($id);
+            
+            $photoScoreArray = $this->score->getPhotoScore($id); //全部分數 for admin
             if(count($photoScoreArray)==0){
                 $totalScore = "尚未評分";
                 $compactArray = array('photoID','photoInfos','photoScoreArray','totalScore','getItemOfNexts','chairScore');
             }else{
                 $unitScore=0;
                 foreach($photoScoreArray as $data){
-                    $score = ($data['scoreA']+$data['scoreB']+$data['scoreC'])/3;
+                    $score = (($data['scoreA']*0.3)+($data['scoreB']*0.3)+($data['scoreC']*0.4));
                     $unitScore+=$score;
                 }
                 $totalScore =round($unitScore/count($photoScoreArray), 4); 
@@ -133,23 +137,52 @@ class ItemsController extends Controller
         return response()->json($result);
     }
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * admin取得圖片評分資訊
+     * @arg{$id=> groupID}
      */
-    public function index()
+    public function getAllItemsDataTable(Request $request,$id)
     {
-        //
+        $result = $this->items->getAllItemsDataTable($id);
+       
+        return DataTables::of($result)
+        ->addColumn('action', function ($result) {
+                $status= $result['status']==1?"未評分":"已評分";
+                $color = $result['status']==1?"danger":"primary";
+              return "<p class='text-".$color."'>".$status."</p>";
+            })
+            ->rawColumns(['action'])
+            ->make(true);
     }
-
+      /**
+     * admin取得各評審圖片評分資訊
+     * @arg{$id=> user ID}
+     */
+    public function getAllItemsDataTableWithChair(Request $request,$id)
+    {
+        $result = $this->items->getAllItemsDataTableWithChair($id);
+      
+        return DataTables::of($result)
+         ->addColumn('action', function ($result) {
+                $status= $result['status']==1?"未評分":"已評分";
+                $color = $result['status']==1?"danger":"primary";
+                return "<p class='text-".$color."'>".$status."</p>";
+            })
+             ->rawColumns(['action'])
+            ->make(true);
+    }
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * admin取得各組評分排名
      */
-    public function create()
+    public function getAllItemsRankDataTable($id)
     {
-        //
+        $result = $this->items->getAllItemsRankDataTable($id);
+        return DataTables::of($result)
+        //  ->addColumn('action', function ($result) {
+        //         $status= $result['status']==1?"未評分":"已評分";
+        //         $color = $result['status']==1?"danger":"primary";
+        //         return "<p class='text-".$color."'>".$status."</p>";
+        //     })
+        //      ->rawColumns(['action'])
+            ->make(true);
     }
-
 }

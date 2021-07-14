@@ -11,7 +11,7 @@
 
 
     <!-- Header-->
-    <header class="bg-dark py-5">
+    <header class="bg-Custom-blue py-5">
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
                 <h1 class="display-5 fw-bolder">第一屆資訊學院城鄉資訊能力深化培育與應用推廣計畫<br>攝影比賽評審系統-後台設置</h1>
@@ -30,11 +30,14 @@
                         type="button" role="tab" aria-controls="nav-group" aria-selected="true">組別設置</button>
                     <button class="nav-link h4" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
                         type="button" role="tab" aria-controls="nav-profile" aria-selected="false">資料新增</button>
+                    <button class="nav-link h4" id="nav-export-tab" data-bs-toggle="tab" data-bs-target="#nav-export"
+                        type="button" role="tab" aria-controls="nav-export" aria-selected="false">資料匯出</button>
                     <button class="nav-link h4" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact"
                         type="button" role="tab" aria-controls="nav-contact" aria-selected="false">權限設置</button>
+
                 </div>
             </nav>
-            <div class="tab-content" id="nav-tabContent">
+            <div class="tab-content" id="nav-tabContent" style="height:50vh">
                 <div class="tab-pane fade show active row" id="nav-group" role="tabpanel" aria-labelledby="nav-group-tab">
                     <p class="text-danger">**設置完畢後，務必保存設置</p>
                     <form action="" id="group-form">
@@ -57,6 +60,30 @@
                                     class="h4">上傳</span></button>
                         </div>
                     </form>
+                </div>
+                <div class="tab-pane fade" id="nav-export" role="tabpanel" aria-labelledby="nav-export-tab">
+                    <p class="text-danger mt-4">**以EXCEL檔案匯出</p>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">動作</th>
+                                <th scope="col">匯出</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">分數資料匯出</th>
+                                <td>
+                                    <button type="button" class=" btn btn-outline-success"
+                                        onclick="File.exportFile('1')">人像攝影組資料匯出</button>
+                                    <button type="button" class=" btn btn-outline-primary"
+                                        onclick="File.exportFile('2')">風景拍攝組資料匯出</button>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
                 </div>
                 <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                     <div class="d-flex align-items-start">
@@ -143,7 +170,7 @@
         var addGroup = document.getElementById('addNewGroup');
         var groupForm = document.getElementById('group-form');
         var fileForm = document.getElementById('csv-form');
-
+        // var exportCSV = document.getElementById('exportCSVOfScore');
         var Group = {
             /**
              * 組別
@@ -334,6 +361,9 @@
                         }, (err) => {
                             console.log(err);
                         });
+            },
+            exportFile: (id) => {
+                window.location.href = `{{ url('back/exportCSV/${id}') }}`;
             }
         };;
         (function() {
