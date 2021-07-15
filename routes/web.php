@@ -67,4 +67,6 @@ Route::group(['prefix' => 'items','middleware' => 'identity'], function () {
 Route::group(['prefix' => 'portfolio'], function () {
     Route::get('/', [PortfolioController::class, 'index']);
     Route::get('/items/{id}', [PortfolioController::class, 'getItems']);
+    Route::get('/group/{id}', [PortfolioController::class, 'getGroupOfItem']);
+    
 });

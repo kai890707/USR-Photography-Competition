@@ -64,15 +64,22 @@
                                 <div class="d-flex justify-content-center   large text-warning">
                                     @php
                                         $score = $photoInfos[0]->total;
-                                        $fullStarCount = intval($score / 10) / 2; //整顆星星
-                                        $halfStarCount = $score % 10 > 0 ? 1 : 0; //半顆星星
+                                        if ($score >= 90) {
+                                            $fullStarCount = 5;
+                                            $halfStarCount = 0;
+                                        } else {
+                                            $fullStarCount = intval(intval($score / 9) / 2); //整顆星星
+                                            $halfStarCount = $score % 10 > 0 ? 1 : 0; //半顆星星
+                                        }
+                                        
                                     @endphp
                                     @for ($i = 0; $i < $fullStarCount; $i++)
-                                        <div class="bi-star-fill h3 m-0"></div>
+                                        <div class="bi-star-fill"></div>
                                     @endfor
                                     @if ($halfStarCount == 1)
-                                        <div class="bi bi-star-half h3 m-0"></div>
+                                        <div class="bi bi-star-half"></div>
                                     @endif
+
                                 </div>
                             </div>
                         </div>
@@ -107,8 +114,14 @@
                                         <div class="d-flex justify-content-center large text-warning mb-2">
                                             @php
                                                 $score = $getItemOfNext->total;
-                                                $fullStarCount = intval($score / 10) / 2; //整顆星星
-                                                $halfStarCount = $score % 10 > 0 ? 1 : 0; //半顆星星
+                                                if ($score >= 90) {
+                                                    $fullStarCount = 5;
+                                                    $halfStarCount = 0;
+                                                } else {
+                                                    $fullStarCount = intval(intval($score / 9) / 2); //整顆星星
+                                                    $halfStarCount = $score % 10 > 0 ? 1 : 0; //半顆星星
+                                                }
+                                                
                                             @endphp
                                             @for ($i = 0; $i < $fullStarCount; $i++)
                                                 <div class="bi-star-fill"></div>
@@ -116,6 +129,7 @@
                                             @if ($halfStarCount == 1)
                                                 <div class="bi bi-star-half"></div>
                                             @endif
+
                                         </div>
                                     </div>
                                 </div>

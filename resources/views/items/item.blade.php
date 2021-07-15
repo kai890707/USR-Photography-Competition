@@ -16,8 +16,11 @@
                         {{-- <img class="card-img-top"
                                 src="https://drive.google.com/uc?export=view&id=1wmuADUn2sqCHBXryWipG1SowByzTQXeh" alt="..."
                                 width="268px" height="179px" /> --}}
-                        <img class="card-img-top"
-                            src="https://drive.google.com/uc?export=view&id={{ $photoInfos[0]->photoPath }}" alt="..." />
+                        <a href="https://drive.google.com/uc?export=view&id={{ $photoInfos[0]->photoPath }}"
+                            target="_blank"> <img class="card-img-top"
+                                src="https://drive.google.com/uc?export=view&id={{ $photoInfos[0]->photoPath }}"
+                                alt="..." /></a>
+
 
                         <!-- <img class="card-img-top mb-5 mb-md-0" src="" alt="..." />  -->
                     </div>

@@ -33,7 +33,7 @@ class Portfolio extends Model
     }
     public function getGroupOfItem($groupID)
     {
-        $selectArray = [
+       $selectArray = [
             'photo.id as photoId', 
             'group.name as groupName', 
             'applicant.name as applicantName', 
@@ -41,13 +41,16 @@ class Portfolio extends Model
             'photo.illustrate as photoIllustrate',
             'photo.path as photoPath',
             'applicant.community as applicantCommunity',
-            'score.status as photoStatus'
+            'score.status as photoStatus',
+            DB::raw('round(AVG(score.score_A*0.3+score.score_B*0.3+score.score_C*0.4),4) as total')
         ];
         $query = Items::join('group', 'photo.group_id', '=', 'group.id')
             ->join('applicant', 'photo.applicant_id', '=', 'applicant.id')
             ->join('score', 'photo.id', '=', 'score.photo_id')
             ->select($selectArray)
             ->where('photo.group_id', $groupID)
+            ->where('score.status',2)
+            ->groupBy('photo.id')
             ->paginate(8);
         return $query;
     }

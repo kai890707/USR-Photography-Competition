@@ -3,16 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Portfolio;
+use App\Models\Group;
 use Illuminate\Http\Request;
 
 class PortfolioController extends Controller
 {
     public $portfolio;
+    public $group;
     public function __construct()
     {
         # code...
         $this->portfolio = new Portfolio();
-
+        $this->group = new Group();
     }
     /**
      * Display a listing of the resource.
@@ -22,8 +24,8 @@ class PortfolioController extends Controller
     public function index()
     {
         //
-        $all = $this->portfolio->getAllItems();
-        return view('portfolio.index',compact('all'));
+        $datas = $this->portfolio->getAllItems();
+        return view('portfolio.index',compact('datas'));
     }
     /**
      * $id=>圖片ID
@@ -41,10 +43,15 @@ class PortfolioController extends Controller
         }
   
     }
-  
-    public function getGroupOfItem()
+  /**
+   * $id => group id
+   */
+    public function getGroupOfItem($id)
     {
         # code...
+       $datas = $this->portfolio->getGroupOfItem($id);
+        $groupName = $this->group->getGroupName($id);
+        return view('portfolio.index',compact('datas','groupName'));
     }
     /**
      * Show the form for creating a new resource.

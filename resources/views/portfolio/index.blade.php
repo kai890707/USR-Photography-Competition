@@ -21,10 +21,17 @@
     <section class="py-5" style="min-height:50vh">
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row justify-content-center mb-4">
-                <h1 class="text-center">所有作品</h1>
+                <h1 class="text-center">
+                    @if (isset($groupName))
+                        {{ $groupName->groupName }}
+                    @else
+                        所有作品
+                    @endif
+
+                </h1>
             </div>
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                @foreach ($all as $data)
+                @foreach ($datas as $data)
                     <div class="col mb-5">
                         <div class="card h-100">
 
@@ -46,8 +53,14 @@
                                     <div class="d-flex justify-content-center large text-warning mb-2">
                                         @php
                                             $score = $data->total;
-                                            $fullStarCount = intval($score / 10) / 2; //整顆星星
-                                            $halfStarCount = $score % 10 > 0 ? 1 : 0; //半顆星星
+                                            if ($score >= 90) {
+                                                $fullStarCount = 5;
+                                                $halfStarCount = 0;
+                                            } else {
+                                                $fullStarCount = intval(intval($score / 9) / 2); //整顆星星
+                                                $halfStarCount = $score % 10 > 0 ? 1 : 0; //半顆星星
+                                            }
+                                            
                                         @endphp
                                         @for ($i = 0; $i < $fullStarCount; $i++)
                                             <div class="bi-star-fill"></div>
@@ -72,7 +85,7 @@
             </div>
             <div class="row">
                 <div class="col-12 d-flex justify-content-center ">
-                    {!! $all->render('vendor.pagination.bootstrap-4') !!}
+                    {!! $datas->render('vendor.pagination.bootstrap-4') !!}
                 </div>
 
             </div>
