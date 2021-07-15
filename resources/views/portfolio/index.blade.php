@@ -76,7 +76,7 @@
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <div class="text-center"><button class="btn btn-outline-dark mt-auto"
-                                        onclick="control.watchItems(`{{ $data->photoId }}`)">前往評分</button></div>
+                                        onclick="control.watchItems(`{{ $data->photoId }}`)">前往觀賞</button></div>
                             </div>
                         </div>
                     </div>

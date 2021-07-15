@@ -70,13 +70,14 @@ class Portfolio extends Model
             'applicant.community as applicantCommunity',
             'score.status as photoStatus',
             'score.comments as comments',
-            DB::raw('round(AVG(score.score_A*0.3+score.score_B*0.3+score.score_C*0.4),4) as total')
+             DB::raw('round(AVG(score.score_A*0.3+score.score_B*0.3+score.score_C*0.4),4) as total')
         ];
         $query = Portfolio::join('group', 'photo.group_id', '=', 'group.id')
             ->join('applicant', 'photo.applicant_id', '=', 'applicant.id')
             ->join('score', 'photo.id', '=', 'score.photo_id')
             ->select($selectArray)
             ->where('photo.id', $id)
+            ->where('score.status',2)
             ->groupBy('photo.id')
             ->get();
         return $query;
