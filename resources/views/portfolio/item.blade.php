@@ -39,9 +39,41 @@
                                         <td>{{ $photoInfos[0]->applicantCommunity }}</td>
                                         <td> {{ $photoInfos[0]->applicantName }}</td>
                                     </tr>
+
                                     <tr>
                                         <td colspan="2">
+                                            <div class="fs-5 mt-4 mb-4 row">
+                                                <div class="col-4">
+                                                    <h3 class=" fw-bolder m-0  d-flex align-items-center">綜合評價<span
+                                                            class="display-6 fw-bolder text-danger">&nbsp;
+                                                        </span>
+                                                    </h3>
+                                                </div>
+                                                <div class="col-8 d-flex align-items-center">
+                                                    <div class="d-flex justify-content-center   large text-warning">
+                                                        @php
+                                                            $score = $photoInfos[0]->total;
+                                                            if ($score >= 90) {
+                                                                $fullStarCount = 5;
+                                                                $halfStarCount = 0;
+                                                            } else {
+                                                                $fullStarCount = intval(intval($score / 9) / 2); //整顆星星
+                                                                $halfStarCount = $score % 10 > 0 ? 1 : 0; //半顆星星
+                                                            }
+                                                            
+                                                        @endphp
+                                                        @for ($i = 0; $i < $fullStarCount; $i++)
+                                                            <div class="bi-star-fill"></div>
+                                                        @endfor
+                                                        @if ($halfStarCount == 1)
+                                                            <div class="bi bi-star-half"></div>
+                                                        @endif
+
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="row" id="template_checkbox1">
+
                                                 <div class="col-6">
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" value="1"
@@ -89,11 +121,71 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-floating">
-                                                <textarea class="form-control" placeholder="Leave a comment here"
-                                                    id="comments" style="height: 100px"
-                                                    disabled>{{ $photoInfos[0]->comments }}</textarea>
-                                                <label for="comments">評語</label>
+
+                                            <div class="accordion mt-4" id="accordionExample">
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header" id="headingOne">
+                                                        <button class="accordion-button" type="button"
+                                                            data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                                            aria-expanded="true" aria-controls="collapseOne">
+                                                            評審 {{ $chair[0]->name }} 評語
+                                                        </button>
+                                                    </h2>
+                                                    <div id="collapseOne" class="accordion-collapse collapse show"
+                                                        aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                        <div class="accordion-body">
+                                                            <div class="form-floating">
+                                                                <textarea class="form-control"
+                                                                    placeholder="Leave a comment here" id="comments"
+                                                                    style="height: 100px"
+                                                                    disabled>{{ $comments[0] }}</textarea>
+                                                                <label for="comments">評語</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header" id="headingTwo">
+                                                        <button class="accordion-button collapsed" type="button"
+                                                            data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                                            aria-expanded="false" aria-controls="collapseTwo">
+                                                            評審 {{ $chair[1]->name }} 評語
+                                                        </button>
+                                                    </h2>
+                                                    <div id="collapseTwo" class="accordion-collapse collapse"
+                                                        aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                                        <div class="accordion-body">
+                                                            <div class="form-floating">
+                                                                <textarea class="form-control"
+                                                                    placeholder="Leave a comment here" id="comments"
+                                                                    style="height: 100px"
+                                                                    disabled>{{ $comments[1] }}</textarea>
+                                                                <label for="comments">評語</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header" id="headingThree">
+                                                        <button class="accordion-button collapsed" type="button"
+                                                            data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                                                            aria-expanded="false" aria-controls="collapseThree">
+                                                            評審 {{ $chair[2]->name }} 評語
+                                                        </button>
+                                                    </h2>
+                                                    <div id="collapseThree" class="accordion-collapse collapse"
+                                                        aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                                        <div class="accordion-body">
+                                                            <div class="form-floating">
+                                                                <textarea class="form-control"
+                                                                    placeholder="Leave a comment here" id="comments"
+                                                                    style="height: 100px"
+                                                                    disabled>{{ $comments[2] }}</textarea>
+                                                                <label for="comments">評語</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </td>
                                     </tr>
@@ -101,36 +193,7 @@
                             </table>
                         </div>
 
-                        <div class="fs-5 mt-4 mb-4 row">
-                            <div class="col-4">
-                                <h3 class=" fw-bolder m-0  d-flex align-items-center">評審評價<span
-                                        class="display-6 fw-bolder text-danger">&nbsp;
-                                    </span>
-                                </h3>
-                            </div>
-                            <div class="col-8 d-flex align-items-center">
-                                <div class="d-flex justify-content-center   large text-warning">
-                                    @php
-                                        $score = $photoInfos[0]->total;
-                                        if ($score >= 90) {
-                                            $fullStarCount = 5;
-                                            $halfStarCount = 0;
-                                        } else {
-                                            $fullStarCount = intval(intval($score / 9) / 2); //整顆星星
-                                            $halfStarCount = $score % 10 > 0 ? 1 : 0; //半顆星星
-                                        }
-                                        
-                                    @endphp
-                                    @for ($i = 0; $i < $fullStarCount; $i++)
-                                        <div class="bi-star-fill"></div>
-                                    @endfor
-                                    @if ($halfStarCount == 1)
-                                        <div class="bi bi-star-half"></div>
-                                    @endif
 
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
         </section>
@@ -204,15 +267,17 @@
                     window.location.href = `{{ url('/portfolio/items/${id}') }}`;
                 }
             }
-            var checked = @json($photoInfos[0]->checkValue);
+            var checked = @json($realCheck);
             let template_checkbox1 = document.querySelectorAll(`#template_checkbox1 input[type='checkbox']`);
             let template_checkbox1_label = document.querySelectorAll(`#template_checkbox1 label`);
-            for (let i = 0; i < template_checkbox1.length; i++) {
-                for (let j = 0; j < checked.length; j++) {
-                    if (checked[j] == template_checkbox1[i].value) {
-                        template_checkbox1[i].checked = true;
-                        template_checkbox1[i].style.opacity = 1;
-                        template_checkbox1_label[i].style.opacity = 1;
+            if (checked != null) {
+                for (let i = 0; i < template_checkbox1.length; i++) {
+                    for (let j = 0; j < checked.length; j++) {
+                        if (checked[j] == template_checkbox1[i].value) {
+                            template_checkbox1[i].checked = true;
+                            template_checkbox1[i].style.opacity = 1;
+                            template_checkbox1_label[i].style.opacity = 1;
+                        }
                     }
                 }
             }

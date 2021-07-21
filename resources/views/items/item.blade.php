@@ -455,17 +455,20 @@
             let checkbox = document.querySelectorAll(`#scoreSheet_form input[type='checkbox']`);
             let template_checkbox1 = document.querySelectorAll(`#template_checkbox1 input[type='checkbox']`);
             let template_checkbox1_label = document.querySelectorAll(`#template_checkbox1 label`);
-            for (let i = 0; i < checkbox.length; i++) {
-                for (let j = 0; j < checked.length; j++) {
-                    if (checked[j] == checkbox[i].value) {
-                        checkbox[i].checked = true;
-                        template_checkbox1[i].checked = true;
-                        template_checkbox1[i].style.opacity = 1;
-                        template_checkbox1_label[i].style.opacity = 1;
-                        // console.log(template_checkbox1[i]);
+            if (checked != null) {
+                for (let i = 0; i < checkbox.length; i++) {
+                    for (let j = 0; j < checked.length; j++) {
+                        if (checked[j] == checkbox[i].value) {
+                            checkbox[i].checked = true;
+                            template_checkbox1[i].checked = true;
+                            template_checkbox1[i].style.opacity = 1;
+                            template_checkbox1_label[i].style.opacity = 1;
+                            // console.log(template_checkbox1[i]);
+                        }
                     }
                 }
             }
+
             var form = document.getElementById("scoreSheet_form");
             form.addEventListener("submit", (e) => {
                 e.preventDefault();

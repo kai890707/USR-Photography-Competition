@@ -67,7 +67,9 @@ class Score extends Model
     public function insertScore($request)
     {
         $data = $request->all();
-        $query = Score::insert([
+        $query = Score::where('photo_id', $data['photoId'])
+            ->where('user_id', $request->session()->get('uuid'))
+            ->insert([
             'photo_id' => $data['photoId'],
             'user_id' => $request->session()->get('uuid'),
             'score_A' => $data['scoreA'],

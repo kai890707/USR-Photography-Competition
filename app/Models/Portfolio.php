@@ -69,8 +69,8 @@ class Portfolio extends Model
             'photo.path as photoPath',
             'applicant.community as applicantCommunity',
             'score.status as photoStatus',
-            'score.comments as comments',
-            'score.checkValue as checkValue',
+            // 'score.comments as comments',
+            // 'score.checkValue as checkValue',
              DB::raw('round(AVG(score.score_A*0.3+score.score_B*0.3+score.score_C*0.4),4) as total')
         ];
         $query = Portfolio::join('group', 'photo.group_id', '=', 'group.id')
@@ -82,6 +82,22 @@ class Portfolio extends Model
             ->groupBy('photo.id')
             ->get();
         return $query;
+    }
+    public function getPhotoCommentsAndCheckValue($id)
+    {
+         $selectArray = [
+            'score.comments as comments',
+            'score.checkValue as checkValue',
+        ];
+        $query = Portfolio::join('group', 'photo.group_id', '=', 'group.id')
+            ->join('applicant', 'photo.applicant_id', '=', 'applicant.id')
+            ->join('score', 'photo.id', '=', 'score.photo_id')
+            ->select($selectArray)
+            ->where('photo.id', $id)
+            ->groupBy('score.checkValue')
+            ->where('score.status',2)
+            ->get();
+        return $query;   
     }
      /**
      * 獲取往後4筆作品
