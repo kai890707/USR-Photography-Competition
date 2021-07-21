@@ -70,6 +70,7 @@ class Portfolio extends Model
             'applicant.community as applicantCommunity',
             'score.status as photoStatus',
             'score.comments as comments',
+            'score.checkValue as checkValue',
              DB::raw('round(AVG(score.score_A*0.3+score.score_B*0.3+score.score_C*0.4),4) as total')
         ];
         $query = Portfolio::join('group', 'photo.group_id', '=', 'group.id')

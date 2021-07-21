@@ -18,13 +18,13 @@ class UsersExport implements FromCollection,WithHeadings
         # code...
         return [
             "組別名稱",
-            "評分表編號",
-            "圖片編號",
             "投稿人姓名",
+            "圖片編號",
             "構圖技巧平均分數",
             "攝影技巧平均分數",
             "主題內容平均分數",
             "總分",
+            "圖片位置"
         ];
 
     }
@@ -35,7 +35,7 @@ class UsersExport implements FromCollection,WithHeadings
     public function collection()
     {
         $item = new Items();
-        return collect($item->getAllItemsRankDataTable($this->id));
+        return collect($item->getAllItemsRankExport($this->id));
     }
 }
 // use Maatwebsite\Excel\Concerns\FromView;

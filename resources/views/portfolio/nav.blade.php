@@ -16,12 +16,17 @@
                             <li>
                                 <hr class="dropdown-divider" />
                             </li>
-                            <li><a class="dropdown-item" href="{{ url('portfolio/group/1') }}">人像攝影組</a></li>
-                            <li><a class="dropdown-item" href="{{ url('portfolio/group/2') }}">風景拍攝組</a></li>
+                            <li><a class="dropdown-item" href="{{ url('portfolio/group/1') }}">社區人物主題攝影組</a></li>
+                            <li><a class="dropdown-item" href="{{ url('portfolio/group/2') }}">社區景觀主題攝影組</a></li>
                         </ul>
                     </li>
                 </ul>
-
+                <form class="d-flex">
+                    <button class="btn btn-outline-dark" type="button" id="logout" hidden>
+                        <i class="bi bi-box-arrow-in-right  "></i>
+                        登出
+                    </button>
+                </form>
             </div>
         </div>
     </nav>

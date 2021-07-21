@@ -233,4 +233,39 @@ class Items extends Model
         return $query;
 
     }
+    /**
+     * 以組別取得分數
+     */
+    public function getAllItemsRankExport($groupId)
+    {
+       $selectArray = [
+            "group.name as groupName",
+            "applicant.name as applicantName", //投稿人
+            "photo.id as photoId",             //圖片ID
+          
+            // "user.name as userName",         //評審
+            DB::raw('round(AVG(score.score_A),4) as scoreA'),         //分數A
+            DB::raw('round(AVG(score.score_B),4) as scoreB'),
+            DB::raw('round(AVG(score.score_C),4) as scoreC'),
+            DB::raw('round(AVG(score.score_A*0.3+score.score_B*0.3+score.score_C*0.4),4) as total'),
+            "photo.path as photoPath",
+        ];
+       $query = Items::join('group', 'photo.group_id', '=', 'group.id')
+            ->join('applicant', 'photo.applicant_id', '=', 'applicant.id')
+            ->join('score', 'photo.id', '=', 'score.photo_id')
+            ->join('user', 'score.user_id', '=', 'user.id')
+            ->select($selectArray)
+            ->where('group.id', $groupId)
+            ->where('score.status',2)
+            // ->where('photo.id',28)
+            ->groupBy('photo.id')
+            ->orderBy('total','desc')
+            ->get();
+            // dd($query);
+         foreach ($query as $row){
+            $row['photoPath'] = 'https://drive.google.com/uc?export=view&id='.$row['photoPath'];
+        }  
+        return $query;
+
+    }
 }

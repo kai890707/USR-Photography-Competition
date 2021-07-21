@@ -37,7 +37,7 @@
 
                 </div>
             </nav>
-            <div class="tab-content" id="nav-tabContent" style="height:50vh">
+            <div class="tab-content" id="nav-tabContent" style="min-height:60vh">
                 <div class="tab-pane fade show active row" id="nav-group" role="tabpanel" aria-labelledby="nav-group-tab">
                     <p class="text-danger">**設置完畢後，務必保存設置</p>
                     <form action="" id="group-form">
@@ -75,9 +75,9 @@
                                 <th scope="row">分數資料匯出</th>
                                 <td>
                                     <button type="button" class=" btn btn-outline-success"
-                                        onclick="File.exportFile('1')">人像攝影組資料匯出</button>
+                                        onclick="File.exportFile('1')">社區景觀主題攝影組資料匯出</button>
                                     <button type="button" class=" btn btn-outline-primary"
-                                        onclick="File.exportFile('2')">風景拍攝組資料匯出</button>
+                                        onclick="File.exportFile('2')">社區人物主題攝影組資料匯出</button>
                                 </td>
                             </tr>
 

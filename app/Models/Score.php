@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Facades\DB;
 class Score extends Model
 {
     use HasFactory;
@@ -16,7 +16,7 @@ class Score extends Model
     public function getPhotoScore($id)
     {
         $query = Score::join('user', 'score.user_id', '=', 'user.id')
-            ->select('user.name as userName', 'score_A as scoreA', 'score_B as scoreB', 'score_C as scoreC', 'comments','status')
+            ->select('user.name as userName', 'score_A as scoreA', 'score_B as scoreB', 'score_C as scoreC', 'checkValue','comments','status')
             ->where('photo_id', $id)
             ->get();
         return $query;
@@ -29,7 +29,7 @@ class Score extends Model
     {
         # code...
         $query = Score::join('user', 'score.user_id', '=', 'user.id')
-            ->select('user.name as userName', 'score_A as scoreA', 'score_B as scoreB', 'score_C as scoreC', 'comments','status')
+            ->select('user.name as userName', 'score_A as scoreA', 'score_B as scoreB', 'score_C as scoreC','checkValue', 'comments','status', DB::raw('round(score.score_A*0.3+score.score_B*0.3+score.score_C*0.4,4) as total'))
             ->where('photo_id', $id)
             ->where('user_id', $request->session()->get('uuid'))
             ->get();
@@ -51,6 +51,7 @@ class Score extends Model
     public function updateScore($request)
     {
         $data = $request->all();
+        // dd($data['check'][0]);
         $query = Score::where('photo_id', $data['photoId'])
             ->where('user_id', $request->session()->get('uuid'))
             ->update([
@@ -58,6 +59,7 @@ class Score extends Model
                 'score_B' => $data['scoreB'],
                 'score_C' => $data['scoreC'],
                 'comments' => $data['comments'],
+                'checkValue' =>$data['check'],
                 'status' => 2
             ]);
         return $query;
@@ -72,6 +74,7 @@ class Score extends Model
             'score_B' => $data['scoreB'],
             'score_C' => $data['scoreC'],
             'comments' => $data['comments'],
+            'checkValue' =>$data['check'],
             'status' => 2
         ]);
         return $query;

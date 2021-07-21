@@ -49,6 +49,7 @@ class UsersImport implements ToCollection
     {
         foreach ($rows as $row) {
             $aData = $row->toArray();
+            // dd($aData);
             $groupId = $this->group->getGroupId($aData[1])->id; //組別ID
             $allChair = $this->user->getAllChair();             //所有評審(Array)
             $groupName = $aData[1];                             //組別名稱
@@ -56,6 +57,7 @@ class UsersImport implements ToCollection
             $applicantCommunity = $aData[8];                    //投稿人社區
             $applicantPhone = $aData[10];                       //投稿人電話
             $applicantEmail = $aData[11];                       //投稿人Email
+            // dd([$applicantName, $applicantPhone]);
             /**insert Applicant start */
             $applicant = new Applicant();
             $applicant->name = $applicantName;
@@ -64,6 +66,7 @@ class UsersImport implements ToCollection
             $applicant->email = $applicantEmail;
             $result = $applicant->save();
             $applicantReturnId =  $applicant->id;         //投稿人ID
+         
             /** insert end */
             /**歸納圖片資料 start*/
             if(!empty($row[12])){
@@ -121,6 +124,7 @@ class UsersImport implements ToCollection
                             $score->score_C = 0;
                             $score->status = 1 ;
                             $score->save();
+                                // dd($score->id);
                         }
                     }
                 }

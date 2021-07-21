@@ -146,7 +146,7 @@ class BackController extends Controller
         if ($delete) {
             $result = array('status' => ResponseController::$API_SUCCESS, 'msg' => "刪除成功");
         } else {
-            $result = array('status' => ResponseController::$API_SUCCESS, 'msg' => "刪除失敗");
+            $result = array('status' => ResponseController::$API_ERROR, 'msg' => "刪除失敗");
         }
         return response()->json($result);
     }
@@ -157,7 +157,7 @@ class BackController extends Controller
             Excel::import(new UsersImport,$file);
             return response()->json(array('status' => ResponseController::$API_SUCCESS, 'msg' => "匯入成功"));
         }else{
-             return response()->json(array('status' => ResponseController::$API_SUCCESS, 'msg' => "匯入失敗"));
+             return response()->json(array('status' => ResponseController::$API_ERROR, 'msg' => "匯入失敗"));
         }
     }
     public function exportCSV($id)

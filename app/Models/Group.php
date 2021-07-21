@@ -44,6 +44,7 @@ class Group extends Model
     public function getGroupId($groupName)
     {
         $query = Group::select('id')  ->where('name', 'like', '%' . $groupName . '%')->first();
+
         return $query;
     }
 }

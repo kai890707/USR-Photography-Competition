@@ -15,8 +15,8 @@
                             <li>
                                 <hr class="dropdown-divider" />
                             </li>
-                            <li><a class="dropdown-item" href="{{ url('items/allItems/1') }}">人像攝影</a></li>
-                            <li><a class="dropdown-item" href="{{ url('items/allItems/2') }}">風景拍攝</a></li>
+                            <li><a class="dropdown-item" href="{{ url('items/allItems/1') }}">社區人物主題攝影</a></li>
+                            <li><a class="dropdown-item" href="{{ url('items/allItems/2') }}">社區景觀主題攝影</a></li>
                         </ul>
                     </li>
 
@@ -28,8 +28,8 @@
                             <li>
                                 <hr class="dropdown-divider" />
                             </li>
-                            <li><a class="dropdown-item" href="{{ url('items/scoreDone/1') }}">人像攝影</a></li>
-                            <li><a class="dropdown-item" href="{{ url('items/scoreDone/2') }}">風景拍攝</a></li>
+                            <li><a class="dropdown-item" href="{{ url('items/scoreDone/1') }}">社區人物主題攝影</a></li>
+                            <li><a class="dropdown-item" href="{{ url('items/scoreDone/2') }}">社區景觀主題攝影</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -40,8 +40,8 @@
                             <li>
                                 <hr class="dropdown-divider" />
                             </li>
-                            <li><a class="dropdown-item" href="{{ url('items/scoreUnDone/1') }}">人像攝影</a></li>
-                            <li><a class="dropdown-item" href="{{ url('items/scoreUnDone/2') }}">風景拍攝</a></li>
+                            <li><a class="dropdown-item" href="{{ url('items/scoreUnDone/1') }}">社區人物主題攝影</a></li>
+                            <li><a class="dropdown-item" href="{{ url('items/scoreUnDone/2') }}">社區人物主題攝影</a></li>
                         </ul>
                     </li>
                 </ul>

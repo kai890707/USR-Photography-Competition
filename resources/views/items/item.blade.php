@@ -28,7 +28,7 @@
                         <div class="large mb-1">{{ $photoInfos[0]->groupName }}</div>
                         <h1 class="display-5 fw-bolder">{{ $photoInfos[0]->photoName }}</h1>
                         <p class="fw-bolder large">意境說明</p>
-                        <p class="lead">{{ $photoInfos[0]->photoIllustrate }}</p>
+                        <p class="lead" style="word-wrap:break-word; ">{{ $photoInfos[0]->photoIllustrate }}</p>
                         <div class="fs-5 mt-4 mb-4 align-items-center">
                             <table class="table">
                                 <thead class="table-dark">
@@ -66,10 +66,58 @@
                                                     <td>{{ $item->scoreC }}</td>
                                                 </tr>
                                                 <tr class="table-dark">
-                                                    <td colspan="4">評語</td>
+                                                    <td colspan="4">評價與評語</td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="4">
+                                                        <div class="row" id="template_checkbox1">
+                                                            <div class="col-6">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="1" id="flexCheck1" disabled>
+                                                                    <label class="form-check-label lable1" for="flexCheck1">
+                                                                        構圖技巧佳
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="2" id="flexCheck2" disabled>
+                                                                    <label class="form-check-label lable2" for="flexCheck2">
+                                                                        拍攝技巧佳
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="3" id="flexCheck3" disabled>
+                                                                    <label class="form-check-label lable3" for="flexCheck3">
+                                                                        主題敘述佳
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="4" id="flexCheck4" disabled>
+                                                                    <label class="form-check-label lable4" for="flexCheck4">
+                                                                        光影效果佳
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="5" id="flexCheck5" disabled>
+                                                                    <label class="form-check-label lable5" for="flexCheck5">
+                                                                        圖片清晰度佳
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="6" id="flexCheck6" disabled>
+                                                                    <label class="form-check-label lable6" for="flexCheck6">
+                                                                        圖片色彩飽和度佳
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                         <div class="form-floating">
                                                             <textarea class="form-control"
                                                                 placeholder="Leave a comment here" id="comments"
@@ -107,7 +155,7 @@
                             <div class="modal fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
                                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                 <form id="scoreSheet_form">
-                                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                                    <div class="modal-dialog modal-dialog-centered modal-xl ">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="staticBackdropLabel">評分表</h5>
@@ -124,6 +172,7 @@
                                                                 <th scope="col">構圖技巧(30%)</th>
                                                                 <th scope="col">攝影技巧(30%)</th>
                                                                 <th scope="col">主題內容(40%)</th>
+                                                                <th scope="col">總分</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -138,24 +187,95 @@
                                                                         <td>
                                                                             <input type="text" class="form-control"
                                                                                 name="scoreA" id="scoreA"
-                                                                                value="{{ $item->scoreA }}">
+                                                                                value="{{ $item->scoreA }}"
+                                                                                oninput="changeScore()">
                                                                         </td>
                                                                         <td>
                                                                             <input type="text" class="form-control"
                                                                                 name="scoreB" id="scoreB"
-                                                                                value="{{ $item->scoreB }}">
+                                                                                value="{{ $item->scoreB }}"
+                                                                                oninput="changeScore()">
                                                                         </td>
                                                                         <td>
                                                                             <input type="text" class="form-control"
                                                                                 name="scoreC" id="scoreC"
-                                                                                value="{{ $item->scoreC }}">
+                                                                                value="{{ $item->scoreC }}"
+                                                                                oninput="changeScore()">
+                                                                        </td>
+                                                                        <td>
+                                                                            <input type="text" class="form-control"
+                                                                                name="total" id="total"
+                                                                                value="{{ $item->total }}" disabled>
                                                                         </td>
                                                                     </tr>
                                                                     <tr class="table-dark">
-                                                                        <td colspan="4">評語</td>
+                                                                        <td colspan="5">評價與評語</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td colspan="4">
+
+                                                                        <td colspan="5">
+                                                                            <div class="row" id="">
+                                                                                <div class="col-6">
+                                                                                    <div class="form-check">
+                                                                                        <input class="form-check-input"
+                                                                                            type="checkbox" value="1"
+                                                                                            id="flexCheck1" name="check">
+                                                                                        <label class="form-check-label "
+                                                                                            for="flexCheck1">
+                                                                                            構圖技巧佳
+                                                                                        </label>
+                                                                                    </div>
+                                                                                    <div class="form-check">
+                                                                                        <input class="form-check-input"
+                                                                                            type="checkbox" value="2"
+                                                                                            id="flexCheck2" name="check">
+                                                                                        <label class="form-check-label"
+                                                                                            for="flexCheck2">
+                                                                                            拍攝技巧佳
+                                                                                        </label>
+                                                                                    </div>
+                                                                                    <div class="form-check">
+                                                                                        <input class="form-check-input"
+                                                                                            type="checkbox" value="3"
+                                                                                            id="flexCheck3" name="check">
+                                                                                        <label class="form-check-label"
+                                                                                            for="flexCheck3">
+                                                                                            主題敘述佳
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-6">
+                                                                                    <div class="form-check">
+                                                                                        <input class="form-check-input"
+                                                                                            type="checkbox" value="4"
+                                                                                            id="flexCheck4" name="check">
+                                                                                        <label class="form-check-label"
+                                                                                            for="flexCheck4">
+                                                                                            光影效果佳
+                                                                                        </label>
+                                                                                    </div>
+                                                                                    <div class="form-check">
+                                                                                        <input class="form-check-input"
+                                                                                            type="checkbox" value="5"
+                                                                                            id="flexCheck5" name="check">
+                                                                                        <label class="form-check-label"
+                                                                                            for="flexCheck5">
+                                                                                            圖片清晰度佳
+                                                                                        </label>
+                                                                                    </div>
+                                                                                    <div class="form-check">
+                                                                                        <input class="form-check-input"
+                                                                                            type="checkbox" value="6"
+                                                                                            id="flexCheck6" name="check">
+                                                                                        <label class="form-check-label"
+                                                                                            for="flexCheck6">
+                                                                                            圖片色彩飽和度佳
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+
                                                                             <div class="form-floating">
                                                                                 <textarea class="form-control"
                                                                                     placeholder="Leave a comment here"
@@ -186,7 +306,7 @@
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="table-dark">
-                                                                    <td colspan="4">評語</td>
+                                                                    <td colspan="4">評價與評語</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td colspan="4">
@@ -236,7 +356,7 @@
                                         <td>{{ $item->scoreC }}</td>
                                     </tr>
                                     <tr class="table-dark">
-                                        <td colspan="4">評語</td>
+                                        <td colspan="4">評價與評語 </td>
                                     </tr>
                                     <tr>
                                         <td colspan="4">
@@ -327,15 +447,41 @@
                     window.location.href = `{{ url('/items/photoItem/${id}') }}`
                 }
             }
+            /*
+            渲染checkbox
+            */
+            var checked = @json($item->checkValue);
+
+            let checkbox = document.querySelectorAll(`#scoreSheet_form input[type='checkbox']`);
+            let template_checkbox1 = document.querySelectorAll(`#template_checkbox1 input[type='checkbox']`);
+            let template_checkbox1_label = document.querySelectorAll(`#template_checkbox1 label`);
+            for (let i = 0; i < checkbox.length; i++) {
+                for (let j = 0; j < checked.length; j++) {
+                    if (checked[j] == checkbox[i].value) {
+                        checkbox[i].checked = true;
+                        template_checkbox1[i].checked = true;
+                        template_checkbox1[i].style.opacity = 1;
+                        template_checkbox1_label[i].style.opacity = 1;
+                        // console.log(template_checkbox1[i]);
+                    }
+                }
+            }
             var form = document.getElementById("scoreSheet_form");
             form.addEventListener("submit", (e) => {
                 e.preventDefault();
+                var array = [];
+                var checkboxes = document.querySelectorAll('#scoreSheet_form input[type=checkbox]:checked')
+                for (var i = 0; i < checkboxes.length; i++) {
+                    array.push(checkboxes[i].value);
+                }
+                // console.log(array);
                 let data = new FormData(e.target);
+                console.log(array);
+                data.append('check', array);
                 let newData = Response.package(data);
                 Response.post('items/scoreSheet', newData)
                     .then(
                         (res) => {
-                            console.log(res);
                             if (res.status == "API_1") {
                                 let returnErr = res.msg;
                                 errTemplate = '';
@@ -373,5 +519,19 @@
                             console.log(err);
                         });
             });
+
+
+            // scoreA.addEventListener('onkeypress ', () => {
+            //     total.onblur = function() {
+            //         this.value = scoreA.value
+            //     }
+            // });
+
+            function changeScore() {
+                var scoreA = document.querySelector('#scoreA').value;
+                var scoreB = document.querySelector('#scoreB').value;
+                var scoreC = document.querySelector('#scoreC').value;
+                document.querySelector('#total').value = +scoreA * 0.3 + +scoreB * 0.3 + +scoreC * 0.4;
+            }
         </script>
     @endsection

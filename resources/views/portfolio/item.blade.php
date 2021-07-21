@@ -25,7 +25,7 @@
                         <div class="large mb-1">{{ $photoInfos[0]->groupName }}</div>
                         <h1 class="display-5 fw-bolder">{{ $photoInfos[0]->photoName }}</h1>
                         <p class="fw-bolder large">意境說明</p>
-                        <p class="lead">{{ $photoInfos[0]->photoIllustrate }}</p>
+                        <p class="lead" style="word-wrap:break-word; ">{{ $photoInfos[0]->photoIllustrate }}</p>
                         <div class="fs-5 mt-4 mb-4 align-items-center">
                             <table class="table">
                                 <thead class="table-dark">
@@ -41,6 +41,54 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2">
+                                            <div class="row" id="template_checkbox1">
+                                                <div class="col-6">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="1"
+                                                            id="flexCheck1" disabled>
+                                                        <label class="form-check-label lable1" for="flexCheck1">
+                                                            構圖技巧佳
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="2"
+                                                            id="flexCheck2" disabled>
+                                                        <label class="form-check-label lable2" for="flexCheck2">
+                                                            拍攝技巧佳
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="3"
+                                                            id="flexCheck3" disabled>
+                                                        <label class="form-check-label lable3" for="flexCheck3">
+                                                            主題敘述佳
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="4"
+                                                            id="flexCheck4" disabled>
+                                                        <label class="form-check-label lable4" for="flexCheck4">
+                                                            光影效果佳
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="5"
+                                                            id="flexCheck5" disabled>
+                                                        <label class="form-check-label lable5" for="flexCheck5">
+                                                            圖片清晰度佳
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="6"
+                                                            id="flexCheck6" disabled>
+                                                        <label class="form-check-label lable6" for="flexCheck6">
+                                                            圖片色彩飽和度佳
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="form-floating">
                                                 <textarea class="form-control" placeholder="Leave a comment here"
                                                     id="comments" style="height: 100px"
@@ -153,7 +201,19 @@
         <script>
             var control = {
                 watchItems: (id) => {
-                    window.location.href = `{{ url('/portfolio/items/${id}') }}`
+                    window.location.href = `{{ url('/portfolio/items/${id}') }}`;
+                }
+            }
+            var checked = @json($photoInfos[0]->checkValue);
+            let template_checkbox1 = document.querySelectorAll(`#template_checkbox1 input[type='checkbox']`);
+            let template_checkbox1_label = document.querySelectorAll(`#template_checkbox1 label`);
+            for (let i = 0; i < template_checkbox1.length; i++) {
+                for (let j = 0; j < checked.length; j++) {
+                    if (checked[j] == template_checkbox1[i].value) {
+                        template_checkbox1[i].checked = true;
+                        template_checkbox1[i].style.opacity = 1;
+                        template_checkbox1_label[i].style.opacity = 1;
+                    }
                 }
             }
         </script>
