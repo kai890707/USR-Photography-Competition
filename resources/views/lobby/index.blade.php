@@ -74,6 +74,7 @@
                     <a class="nav-link" href="https://forms.gle/4kWvgDmtjQjMsAkMA" target="blank">報名參加</a>
                     <a class="nav-link" href="{{ url('login') }}">評審登入</a>
                     <a class="nav-link" href="{{ url('portfolio') }}">作品集</a>
+                    <a class="nav-link" href="{{ url('assets/城鄉資訊能力深化培育與應用推廣計畫線上攝影比賽.pdf') }}">比賽辦法</a>
                 </nav>
             </div>
         </header>
