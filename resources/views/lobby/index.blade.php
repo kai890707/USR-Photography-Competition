@@ -105,7 +105,7 @@
                         <img src="{{ url('images/stu.jpg') }}" alt="" class="img-fluid float-end">
                     </div> --}}
                             <div class="col-md-6 col-12">
-                                <h5 class=" m-0 text-center text-white fw-bolder">上級指導人員</h5>
+                                <h5 class=" m-0 text-center text-white fw-bolder">活動負責人</h5>
                                 <p class="m-0 text-center text-white">樹德科技大學資訊工程系蘇怡仁教授</p>
                             </div>
                         </div>
