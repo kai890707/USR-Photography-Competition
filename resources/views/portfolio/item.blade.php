@@ -138,7 +138,9 @@
                                                                 <textarea class="form-control"
                                                                     placeholder="Leave a comment here" id="comments"
                                                                     style="height: 100px"
-                                                                    disabled>{{ $comments[0] }}</textarea>
+                                                                    disabled>
+                                                                     {{ isset($comments[0]) ? $comments[0] : '' }}
+                                                                    </textarea>
                                                                 <label for="comments">評語</label>
                                                             </div>
                                                         </div>
@@ -158,8 +160,9 @@
                                                             <div class="form-floating">
                                                                 <textarea class="form-control"
                                                                     placeholder="Leave a comment here" id="comments"
-                                                                    style="height: 100px"
-                                                                    disabled>{{ $comments[1] }}</textarea>
+                                                                    style="height: 100px" disabled>
+                                                                            {{ isset($comments[1]) ? $comments[1] : '' }}
+                                                                                           </textarea>
                                                                 <label for="comments">評語</label>
                                                             </div>
                                                         </div>
@@ -179,8 +182,9 @@
                                                             <div class="form-floating">
                                                                 <textarea class="form-control"
                                                                     placeholder="Leave a comment here" id="comments"
-                                                                    style="height: 100px"
-                                                                    disabled>{{ $comments[2] }}</textarea>
+                                                                    style="height: 100px" disabled>
+                                                                         {{ isset($comments[2]) ? $comments[2] : '' }}
+                                                                        </textarea>
                                                                 <label for="comments">評語</label>
                                                             </div>
                                                         </div>
